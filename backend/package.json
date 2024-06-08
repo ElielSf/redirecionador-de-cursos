@@ -6,13 +6,20 @@
   "scripts": {
     "dev": "node --watch --no-warnings ./src/server.js"
   },
-  "keywords": ["courses", "creation", "web", "development"],
+  "keywords": [
+    "courses",
+    "creation",
+    "web",
+    "development"
+  ],
   "author": "Eliel Souza Ferreira",
   "license": "ISC",
   "description": "Esse projeto permite acomodar cursos de diferentes plataformas e sites em um só lugar.",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mysql2": "^3.10.0"
+    "mysql2": "^3.10.0",
+    "node": "^20.14.0"
   }
 }
