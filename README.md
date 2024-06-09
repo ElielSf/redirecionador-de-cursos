@@ -49,7 +49,7 @@ Através das funcionalidades do CRUD (criar, ler, atualizar e deletar) o sistema
 <h2 id="system-requirements"> Requisitos de Sistema </h2>
 
   1. Criação de anúncios de cursos. (**essencial**)
-  2. Criação de login com níveis acessos diferentes. (**importante**)
+  2. Criação de login com níveis acessos diferentes. (**essencial**)
   3. Criação de reviews dos anúncios. (importante)
   4. Exibição dos anúncios cadastrados. (**essencial**)
   5. Pesquisa de anúncios pelo nome. (**essencial**) 

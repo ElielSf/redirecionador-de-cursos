@@ -1,0 +1,1 @@
+import { createCourse, readCourse, updateCourse, deleteCourse, searchCourse } from '../models/course_model.js';
