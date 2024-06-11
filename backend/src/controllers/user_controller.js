@@ -1,6 +1,9 @@
+//importando os modelos das consultas
 import { createUser, compareUser } from '../models/user_model.js';
+//importando middlewares
 import { validateEmail } from '../middleware/validate_email_unique.js';
 
+//função asasíncrona que faz o cadastro do usuário
 export async function creatingUser(req, res) {
     //requisitando os dados para criação de usuário do corpo da requisição de forma direta
     const { name_user, email_user, password_user } = req.body;
@@ -11,15 +14,18 @@ export async function creatingUser(req, res) {
     //regex para verificar se tem pelo menos 1 número na senha
     const numberRegex = /\d/;
 
-    //validação do nome de usuário
+    //validando se todos os campos foram preenchidos
+    if (!name_user || !email_user || !password_user) {
+        return res.status(400).send({ message: 'Todos os campos devem ser preenchidos.' });
+    }
+
     //validando se o nome de usuário tem entre 2 e 300 caracteres
-    if (!name_user || name_user.length < 2 || name_user.length > 300) {
+    if (name_user.length < 2 || name_user.length > 300) {
         return res.status(400).send({ message: 'O nome de usuário deve ter entre 2 e 300 caracteres.' });
     }
 
-    //validações de email
-    //validando se o email não é nulo e se ele tem o formato correto
-    if (!email_user || !emailRegex.test(email_user)) {
+    //validando se o email tem o formato correto
+    if (!emailRegex.test(email_user)) {
         return res.status(400).send({ message: 'Formato de email inválido.' });
     }
 
@@ -27,10 +33,9 @@ export async function creatingUser(req, res) {
     if (email_user.length > 300) {
         return res.status(400).send({ message: 'O endereço de email deve ter no máximo 300 caracteres.' });
     }
-    
-    //validações de senha
+
     //validando se a senha não é nula e se tem menos de 8 caracteres
-    if (!password_user || password_user.length < 8) {
+    if (password_user.length < 8) {
         return res.status(400).send({ message: 'A senha deve ter no mínimo 8 caracteres.' });
     }
 
@@ -59,34 +64,34 @@ export async function creatingUser(req, res) {
             }
             //verifica se houve algum resultado
             if (result) {
+                //criando um atributo na sessão para verificar se o usuário está logado
+                req.session.loggedUser = email_user;
                 return res.status(201).send({ message: 'Usuário cadastrado com sucesso.', result: result });
             }
         });
     });
 };
 
+//função assíncrona que faz o login do usuário e cria uma sessão para ele
 export async function loginUser(req, res) {
     //requisitando os dados para login do corpo da requisição de forma direta
     const { email_user, password_user } = req.body;
 
-    //verifica se o email existe
-    if (!email_user) {
-        return res.status(400).send({ message: 'Deve ser enviado um email.' });
-    }
-
-    //verifica se a senha existe
-    if (!password_user) {
-        return res.status(400).send({ message: 'Deve ser enviada uma senha.' });
+    //validando se todos os campos foram preenchidos
+    if (!email_user || !password_user) {
+        return res.status(400).send({ message: 'Todos os campos devem ser preenchidos.' });
     }
 
     //função de login
     compareUser(email_user, password_user, (err, result) => {
         //verifica se ocorreu algum erro
         if (err) {
-            return res.status(500).send({ message: 'Houve um erro no processo de login.', error: err});
+            return res.status(500).send({ message: 'Houve um erro no processo de login.', error: err });
         }
         //verifica se o login foi realizado com sucesso
         if (result === true) {
+            //criando um atributo na sessão para verificar se o usuário está logado
+            req.session.loggedUser = email_user;
             return res.status(200).send({ message: 'Login realizado com sucesso.' });
         }
         //verifica se o login falhou
