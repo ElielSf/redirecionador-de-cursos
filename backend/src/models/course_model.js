@@ -1,3 +1,4 @@
+//importando a conexão com o banco de dados
 import connection from '../config/database.js';
 
 export function createCourse(id_user, name_course, objective_course, photoUrl_course, link_course, callback) {
@@ -54,7 +55,6 @@ export function deleteCourse(id_course, callback) {
 
 export function searchCourse(name_course, callback) {
     const search_value = `%${name_course}%`;
-    console.log(search_value);
 
     const query = `SELECT * FROM course WHERE name_course LIKE ?;`;
     connection.query(query, [search_value], (err, result) => {

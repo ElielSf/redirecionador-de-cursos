@@ -1,3 +1,4 @@
+//importando a conexão com o banco de dados
 import connection from "../config/database.js";
 
 //middleware para validar o email do usuário
