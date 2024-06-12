@@ -37,8 +37,18 @@ app.post('/registro', session({
       secure: false,
       maxAge: expireTime
     }
-}), creatingUser);  
-app.post('/login', loginUser);
+}), creatingUser); 
+
+app.post('/login', session({
+    secret: '37b8f84d-df2e-4d49-b262-bcde74f8764f',
+    store: sessionStore,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      secure: false,
+      maxAge: expireTime
+    }
+}), loginUser);
 
 //rotas de curso
 app.post('/cursos', requireLogin, creatingCourse);

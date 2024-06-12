@@ -1,4 +1,4 @@
-import { createConnection } from 'mysql2';
+import { createConnection } from 'mysql';
 
 const connection = createConnection({
     host: 'localhost',
@@ -13,6 +13,7 @@ connection.connect((err) => {
         return;
     }
     console.log('Conexão com o Banco de Dados estabelecida.');
-});
+}); 
+
 
 export default connection;
