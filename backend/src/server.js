@@ -24,31 +24,26 @@ const PORT = process.env.PORT ?? 6777;
 
 //middlewares de nível de aplicação para todas as requisições
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
+app.use(session({
+  secret: '37b8f84d-df2e-4d49-b262-bcde74f8764f',
+  store: sessionStore,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    maxAge: expireTime
+  }
+}));
 
 //rotas de usuário
 //rota de cadastro com um middleware para criar uma sessão
-app.post('/registro', session({
-    secret: '37b8f84d-df2e-4d49-b262-bcde74f8764f',
-    store: sessionStore,
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-      secure: false,
-      maxAge: expireTime
-    }
-}), creatingUser); 
+app.post('/registro', creatingUser); 
 
-app.post('/login', session({
-    secret: '37b8f84d-df2e-4d49-b262-bcde74f8764f',
-    store: sessionStore,
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-      secure: false,
-      maxAge: expireTime
-    }
-}), loginUser);
+app.post('/login', requireLogin, loginUser);
 
 //rotas de curso
 app.post('/cursos', requireLogin, creatingCourse);

@@ -29,7 +29,7 @@ export function updateCourse(name_course, objective_course, photoUrl_course, lin
     const query = `UPDATE course 
     SET name_course = ?, objective_course = ?, photoUrl_course = ?, link_course = ? 
     WHERE id_course = ? and user_id_user = (
-        SELECT id_user FROM user WHERE id_user = ? AND user_level = 2 OR user_level = 3
+        SELECT id_user FROM user WHERE id_user = ? AND level_user = 2 OR level_user = 3
     );`;
     connection.query(query, [name_course, objective_course, photoUrl_course, link_course, id_course, id_user], (err, result) => {
         if (err) {
