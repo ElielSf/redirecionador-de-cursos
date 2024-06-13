@@ -1,11 +1,10 @@
 import './css/App.css'
+import Login from './components/Login/Login.jsx'
 
-function App() {
+export default function App() {
   return (
-    <div>
-      <h1>a</h1>
+    <div className="w-screen flex items-center justify-center bg-neutral-400">
+      <Login />
     </div>
   )
 }
-
-export default App
