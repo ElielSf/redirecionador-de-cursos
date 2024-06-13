@@ -5,10 +5,13 @@ import { validateLevel } from '../middleware/validate_id_level.js';
 
 //função assíncrona para criar um anúncio de curso
 export async function creatingCourse(req, res) {
+    console.log('s')
     //requisita os dados do anúncio diretamente pelo body
     const { id_user, name_course, objective_course, photoUrl_course, link_course } = req.body;
     //regex que valida o formato da URL recebida(ftp, http, https)
     const urlValid = /^(ftp|http|https):\/\/[^ "]+$/;
+
+    console.log(id_user, name_course)
 
     //valida se todos os campos estão preenchidos
     if (!id_user || !name_course || !objective_course || !photoUrl_course || !link_course) {
@@ -16,7 +19,7 @@ export async function creatingCourse(req, res) {
     }
 
     //validando se o id do usuário é um número, após converter a string recebida para Number
-    if (Number.isInteger(Number(id_user))) {
+    if (!Number.isInteger(Number(id_user))) {
         return res.status(400).send({ message: 'Houve um erro na sua identificação, entre em contato com o suporte.' });
     } 
 
@@ -88,8 +91,10 @@ export async function readingCourse(req, res) {
 //função assíncrona que atualiza os dados do anúncio com o id enviado
 export async function updatingCourse(req, res) {
     //requisitando as informações para atualizar os anúncios do corpo da requisição diretamente
-    const { name_course, objective_course, photoUrl_course, link_course, id_course, id_user } = req.body;
+    const id_course = req.params.id;
+    const { name_course, objective_course, photoUrl_course, link_course, id_user } = req.body;
     //regex que valida o formato da URL recebida(ftp, http, https)
+    console.log(id_user)
     const urlValid = /^(ftp|http|https):\/\/[^ "]+$/;
 
     //valida se todos os campos escritos pelo usuário estão preenchidos
@@ -103,7 +108,7 @@ export async function updatingCourse(req, res) {
     }
 
     //validando se o id do usuário é um número, após converter a string recebida para Number
-    if (Number.isInteger(Number(id_user))) {
+    if (!Number.isInteger(Number(id_user))) {
         return res.status(400).send({ message: 'Houve um erro na sua identificação, entre em contato com o suporte.' });
     } 
 
@@ -161,18 +166,18 @@ export async function updatingCourse(req, res) {
 //função assíncrona que deleta(desativa) o anúncio no banco de dados
 export async function deletingCourse(req, res) {
     //requisitando o id do curso e do usuário diretamente
-    const { id_course } = req.params;
+    const id_course = req.params.id;
     const { id_user } = req.body;
 
     //testando se o id do curso existe e se é um número, após
     //converter o valor(string) recebido para Number
-    if (!id_course || Number.isInteger(Number(id_course))) {
+    if (!id_course || !Number.isInteger(Number(id_course))) {
         return res.status(400).send({ message: 'Selecione um anúncio válido.' });
     } 
 
     //testa se o id do usuário existe e se é um número, após
     //converter o valor(string) recebido para Number
-    if (!id_user || Number.isInteger(Number(id_user))) {
+    if (!id_user || !Number.isInteger(Number(id_user))) {
         return res.status(400).send({ message: 'Houve um erro na sua ação, entre em contato com o suporte.' });
     }
 

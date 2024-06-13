@@ -1,7 +1,7 @@
 //middleware para verificar se o usuário está logado(com uma sessão)
 export function requireLogin(req, res, next) {
     //testa se o usuário tem uma sessão ativa
-    if (req.session) {
+    if (req.session && req.session.loggedUser) {
         //passa para a proxima função do controller caso
         //o usuário esteja logado
         next();

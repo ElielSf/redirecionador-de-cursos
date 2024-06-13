@@ -1,9 +1,9 @@
-import { createConnection } from 'mysql2';
+import { createConnection } from 'mysql';
 
 const connection = createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '123456789',
     database: 'redirect_course_db'
 });
 
@@ -13,6 +13,7 @@ connection.connect((err) => {
         return;
     }
     console.log('Conexão com o Banco de Dados estabelecida.');
-});
+}); 
+
 
 export default connection;

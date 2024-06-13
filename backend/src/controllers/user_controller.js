@@ -76,6 +76,7 @@ export async function creatingUser(req, res) {
 export async function loginUser(req, res) {
     //requisitando os dados para login do corpo da requisição de forma direta
     const { email_user, password_user } = req.body;
+    console.log(email_user, password_user);
 
     //validando se todos os campos foram preenchidos
     if (!email_user || !password_user) {
@@ -92,11 +93,11 @@ export async function loginUser(req, res) {
         if (result === true) {
             //criando um atributo na sessão para verificar se o usuário está logado
             req.session.loggedUser = email_user;
-            return res.status(200).send({ message: 'Login realizado com sucesso.' });
+            return res.status(200).send({ message: 'Login realizado com sucesso.', result: result });
         }
         //verifica se o login falhou
         if (result === false) {
-            return res.status(404).send({ message: 'Usuário não encontrado, verifique seu email e sua senha.' });
+            return res.status(404).send({ message: 'Usuário não encontrado, verifique seu email e sua senha.', result });
         }
     });
 };
