@@ -9,9 +9,10 @@ export function createUser(name_user, email_user, password_user, callback) {
 
     connection.query(query, [name_user, email_user, password_user], (err, result) => {
         //verifica se houve ou não um erro e retorna um resultado correspondente
-        if(err){
+        if (err) {
             callback(err, null);
-        } else {
+        } 
+        if (result) {
             callback(null, result);
         }
     });

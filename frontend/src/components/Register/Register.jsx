@@ -2,8 +2,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import { toast, ToastContainer } from 'react-toastify'
 import { useState } from 'react'
 
-export default function Login() {
+export default function Register() {
   const [userData, setUserData] = useState({
+    name_user: '',
     email_user: '',
     password_user: '',
   })
@@ -44,7 +45,7 @@ export default function Login() {
       e.preventDefault()
       console.log(userData)
 
-      const response = await fetch('http://localhost:6777/login', {
+      const response = await fetch('http://localhost:6777/registro', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -53,16 +54,15 @@ export default function Login() {
       })
       const json = await response.json()
 
-      console.log('\njson: ' + json.message + '\nstatus: ' + json.result)
-      if (json.result === true) {
+      console.log('\nJson: ' + json.message + '\nStatus: ' + json.result)
+      if (json.result && json.result === true) {
         notifySuccess(json.message)
-      }
-      if (json.result === false) {
-        notifyFailed(json.message || 'Email ou senha incorretos')
+      } else {
+        notifyFailed(json.message || 'Erro no cadastro, verifique os campos.')
       }
     } catch (err) {
       console.error('erro: ' + err.stack)
-      notifyFailed('Erro ao realizar o login.')
+      notifyFailed('Erro ao realizar o cadastro.')
     }
   }
 
@@ -81,12 +81,30 @@ export default function Login() {
         theme="dark"
       />
       <form
-        className="w-5/6 h-80 bg-white flex flex-col justify-center items-center rounded-md"
-        id="login-form"
+        className="w-5/6 h-96 bg-white flex flex-col justify-center items-center rounded-md"
+        id="register-form"
         onSubmit={handleSubmit}
       >
         <div className="w-full h-40 text-center flex justify-center items-center">
-          <h1 className="text-4xl">Entrar</h1>
+          <h1 className="text-4xl">Cadastro</h1>
+        </div>
+        <div className="w-full flex flex-col text-left mb-2">
+          <label
+            className="text-whitetext-black text-xl ml-7 mb-1"
+            htmlFor="name_user"
+          >
+            Nome de usuário
+          </label>
+          <input
+            className="border-slate-500 border-2 w-5/6 place-self-center rounded-md pl-1"
+            name="name_user"
+            type="text"
+            value={userData.name_user}
+            onChange={handleChange}
+            title="Campo de nome de usuário"
+            minLength="2"
+            required
+          />
         </div>
         <div className="w-full flex flex-col text-left mb-2">
           <label
@@ -123,13 +141,13 @@ export default function Login() {
             required
           />
         </div>
-        <div className="w-full h-4/5 flex justify-center items-center">
+        <div className="w-full h-3/5 flex justify-center items-center">
           <button
             className="w-1/2 h-1/3 bg-violet-700 text-xl text-white rounded-md"
             type="submit"
-            form="login-form"
+            form="register-form"
           >
-            Login
+            Cadastro
           </button>
         </div>
       </form>

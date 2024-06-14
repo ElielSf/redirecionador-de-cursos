@@ -60,13 +60,13 @@ export async function creatingUser(req, res) {
         createUser(name_user, email_user, password_user, (err, result) => {
             //verifica se aconteceu algum erro
             if (err) {
-                return res.status(400).send({ message: 'Erro interno ao criar usuário.', error: err });
+                return res.status(400).send({ message: 'Erro no servidor ao criar usuário. Tente novamente mais tarde.', error: err });
             }
             //verifica se houve algum resultado
             if (result) {
                 //criando um atributo na sessão para verificar se o usuário está logado
                 req.session.loggedUser = email_user;
-                return res.status(201).send({ message: 'Usuário cadastrado com sucesso.', result: result });
+                return res.status(201).send({ message: 'Usuário cadastrado com sucesso.', result: true });
             }
         });
     });
