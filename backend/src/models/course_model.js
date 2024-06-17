@@ -1,22 +1,27 @@
 //importando a conexão com o banco de dados
 import connection from '../config/database.js';
 
-export function createCourse(id_user, name_course, objective_course, photoUrl_course, link_course, callback) {
+export function createCourse(name_course, objective_course, link_course, tag_course, callback) {
     const query = `INSERT 
-    INTO course(name_course, objective_course, photoUrl_course, link_course, user_id_user) 
-    VALUES(?, ?, ?, ?, ?);`;
-    connection.query(query, [name_course, objective_course, photoUrl_course, link_course, id_user], (err, result) => {
+    INTO course(name_course, objective_course, link_course, tag_course) 
+    VALUES(?, ?, ?, ?);`;
+    connection.query(query, [name_course, objective_course, link_course, tag_course], (err, result) => {
+        console.log(result)
         if (err) {
             callback(err, null);
-        } else {
-            callback(null, result);
+        } else if (result === undefined) {
+            callback(null, null)
+        } else if (result.affectedRows === 0) {
+            callback(null, false);
+        } else if (result.affectedRows > 0) {
+            callback(null, true)
         }
     });
 };
 
 export function readCourse(callback) {
     const query = `SELECT * FROM course WHERE status_course = 1;`;
-    connection.query(query, (err, result) => {
+    connection.query(query, (err, result) => { 
         if (err) {
             callback(err, null);
         } else {
@@ -25,13 +30,11 @@ export function readCourse(callback) {
     });
 };
 
-export function updateCourse(name_course, objective_course, photoUrl_course, link_course, id_course, id_user, callback) {
+export function updateCourse(id_course, name_course, objective_course, link_course, tag_course, callback) {
     const query = `UPDATE course 
-    SET name_course = ?, objective_course = ?, photoUrl_course = ?, link_course = ? 
-    WHERE id_course = ? and user_id_user = (
-        SELECT id_user FROM user WHERE id_user = ? AND level_user = 2 OR level_user = 3
-    );`;
-    connection.query(query, [name_course, objective_course, photoUrl_course, link_course, id_course, id_user], (err, result) => {
+    SET name_course = ?, objective_course = ?, link_course = ?, tag_course = ?
+    WHERE id_course = ?;`;
+    connection.query(query, [name_course, objective_course, link_course, tag_course, id_course], (err, result) => {
         if (err) {
             callback(err, null);
         } else {

@@ -3,11 +3,11 @@
 <!-- Logo do projeto -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/ElielSf/redirecionador-de-cursos">
+    <img src="./frontend/public/PATHIA.png" alt="Logo" width="200" height="200">
   </a>
 
-  <h3 align="center">Nome do projeto</h3>
+  <h3 align="center">Pathia - Controlador de anúncios</h3>
 </div>
 
 
@@ -43,22 +43,16 @@
 
 [![Foto do nome do produto][product-screenshot]](product-url)
 
-Este projeto contempla um sistema que permite criar anúncios de cursos voltados para a programação. 
+Este projeto contempla um sistema que permite administrar anúncios de cursos voltados para desenvolvimento de softwares. 
 
 Através das funcionalidades do CRUD (criar, ler, atualizar e deletar) o sistema se propõe a seguir os requisitos de sistema estabelecidos.
 
 <h2 id="system-requirements"> Requisitos de Sistema </h2>
 
   1. Criação de anúncios de cursos. (**essencial**)
-  2. Criação de login com níveis acessos diferentes. (**essencial**)
-  3. Criação de reviews dos anúncios. (importante)
-  4. Exibição dos anúncios cadastrados. (**essencial**)
-  5. Pesquisa de anúncios pelo nome. (**essencial**) 
-  6. Exibição das reviews cadastradas. (importante)
-  7. Atualizar os anúncios criados. (**essencial**)
-  8. Atualizar as reviews criadas. (importante)
-  9. Deletar os anúncios criados. (**essencial**)
-  10. Deletar as reviews criadas. (importante)
+  2. Exibição dos anúncios cadastrados. (**essencial**)
+  3. Atualizar os anúncios criados. (**essencial**)
+  4. Deletar os anúncios criados. (**essencial**)
 
 <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
 

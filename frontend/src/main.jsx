@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import './css/index.css'
 
 import App from './App.jsx'
-import Authentication from './components/Authentication/Authentication.jsx'
-import Register from './components/Register/Register.jsx'
-import Login from './components/Login/Login.jsx'
 
 import Home from './components/Home/Home.jsx'
+import CourseRegister from './components/CourseRegister/CourseRegister.jsx'
+import CourseControl from './components/CourseControl/CourseControl.jsx'
 
-import './css/index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -18,27 +17,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Authentication />,
-      },
-      {
-        path: '/cadastro',
-        element: <Register />,
-      },
-      {
-        path: '/login',
-        element: <Login />,
-      },
-      {
-        path: '/perfil',
-        // element: <Profile />,
-      },
-      {
-        path: '/cursos',
         element: <Home />,
       },
       {
-        path: '/contato',
-        // element: <Contact />,
+        path: '/cursos/criar',
+        element: <CourseRegister />,
+      },
+      {
+        path: '/cursos/controlar',
+        element: <CourseControl />,
       },
     ],
   },
