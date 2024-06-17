@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ElielSf/redirecionador-de-cursos">
-    <img src="./frontend/public/PATHIA.png" alt="Logo" width="200" height="200">
+    <img src="./frontend/src/assets/PATHIA.png" alt="Logo" width="200" height="200">
   </a>
 
   <h3 align="center">Pathia - Controlador de anúncios</h3>
